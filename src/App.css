@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+.img {
+  width: 150px;
+  height: 150px;
+}
+.header {
+  text-align: center;
+  background-color: rgba(0, 0, 255, 0.329);
+  color: #fff;
+}
+.display {
+  display: flex;
+  justify-content: space-between;
+}
+.footer {
+  text-align: center;
+  background-color: rgba(0, 0, 255, 0.329);
+  color: #fff;
+  margin-top: 350px;
+}
