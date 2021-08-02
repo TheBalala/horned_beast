@@ -37,21 +37,30 @@
   }
 }
 .img {
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
 }
-.header {
-  text-align: center;
-  background-color: rgba(0, 0, 255, 0.329);
-  color: #fff;
-}
-.display {
+
+main {
   display: flex;
   justify-content: space-between;
+  width: 1200px;
+  margin: auto;
 }
+
 .footer {
   text-align: center;
   background-color: rgba(0, 0, 255, 0.329);
   color: #fff;
-  margin-top: 350px;
+  height: 40px;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+header {
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 255, 0.329);
+  color: #fff;
 }

@@ -29,7 +29,8 @@ class Main  extends Component {
         }]
 
         return (
-            <div className='display'>
+            <main>
+                
                 <HornedBeasts 
                  title={arrayOfBeast[0].title}
                  imageUrl={arrayOfBeast[0].image_url}
@@ -47,7 +48,8 @@ class Main  extends Component {
                  imageUrl={arrayOfBeast[2].image_url}
                  description ={arrayOfBeast[2].description}
                  />
-            </div>
+                 
+            </main>
         )
     }
 }

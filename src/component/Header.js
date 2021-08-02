@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 class Header extends Component {
     render() {
         return (
-            <div>
-                <h1 className='header'>horned beast</h1>
-            </div>
+            <header>
+                <h1 style={{marginTop: 0}}>horned beast</h1>
+            </header>
         )
     }
 }
