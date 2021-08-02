@@ -43,18 +43,24 @@
 }
 
 main {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 1200px;
   margin: auto;
 }
-
+.para {
+  text-align: center;
+}
+footer {
+  height: 90px;
+  position: relative;
+}
 .footer {
   text-align: center;
   background-color: rgba(0, 0, 255, 0.329);
   color: #fff;
   height: 40px;
-  bottom: 0;
+  display: fixed;
   position: absolute;
   width: 100%;
 }
@@ -63,4 +69,15 @@ header {
   text-align: center;
   background-color: rgba(0, 0, 255, 0.329);
   color: #fff;
+}
+i {
+  font-size: 25px;
+  cursor: pointer;
+  color: gray;
+}
+i:hover {
+  color: red;
+}
+i:active {
+  transform: scale(.8);
 }
