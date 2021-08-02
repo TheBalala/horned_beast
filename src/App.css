@@ -36,17 +36,25 @@
     transform: rotate(360deg);
   }
 }
-.img {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
+.carded {
+  transition: .7s linear;
 }
-
+.carded:active {
+  transform: scale(.7);
+}
 main {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  width: 1200px;
+  grid-template-columns: repeat(3,300px);
+  width: 950px;
   margin: auto;
+  gap: 40px;
+  text-align: center;
+}
+.Title {
+  font-weight: bold;
+  color: #000;
+  font-size: 22px;
+  font-family:'Times New Roman', Times, serif;
 }
 .para {
   text-align: center;
@@ -80,4 +88,5 @@ i:hover {
 }
 i:active {
   transform: scale(.8);
+  outline: none;
 }
