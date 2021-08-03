@@ -16,26 +16,29 @@ class HornedBeasts extends Component {
             })
         )
     }
+    ShowList=()=>{
+        let data ={
+            imageUrl: this.props.imageUrl,
+            title:this.props.title,
+            description: this.props.description
+        }
+        this.props.showDataList(data)
+    }
 
     render() {
         return (
 
             <>
-                {/* <h2>{this.props.title}</h2>
-                <img className='img' src={this.props.imageUrl} alt={this.props.title} />
-                <p className='para'>{this.props.description}</p>
-                <i onClick={()=>this.counterHandler()} className='i'class="fas fa-heart"></i>
-                <span>{this.state.counter}</span> */}
-                <Card >
+                <Card bg='light'>
                     <Card.Img className='carded' variant="top" onClick={() => this.counterHandler()} src={this.props.imageUrl} width={200} height={280} />
                     <Card.Body>
                         <Card.Title className="Title">{this.props.title}</Card.Title>
-                        <Card.Text style={{alignItems:'center'}}>
+                        <Card.Text style={{ alignItems: 'center' }}>
                             {this.props.description}
                         </Card.Text>
                         <i onClick={() => this.counterHandler()} className='i' class="fas fa-heart"></i>
                         <span>{this.state.counter}</span><br />
-                        <Button variant="info">click me </Button>
+                        <Button onClick={this.ShowList} variant="dark">click me </Button>
                     </Card.Body>
                 </Card>
             </>
