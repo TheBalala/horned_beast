@@ -38,6 +38,7 @@
 }
 .carded {
   transition: .7s linear;
+  border-bottom: 1px solid black;
 }
 .carded:active {
   transform: scale(.7);
