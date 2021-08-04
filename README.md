@@ -110,3 +110,15 @@ Start time: 2 pm
 Finish time: 5pm
 
 Actual time needed to complete: 2 hours
+
+## class 04
+
+### Number and name of feature: Feature 1. Filter by Numbers of Horns
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 2 pm
+
+Finish time: 4pm
+
+Actual time needed to complete: 1 hours

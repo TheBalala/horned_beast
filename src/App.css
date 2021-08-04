@@ -43,7 +43,7 @@
 .carded:active {
   transform: scale(.7);
 }
-main {
+.mained {
   display: grid;
   grid-template-columns: repeat(3,300px);
   width: 950px;
@@ -60,19 +60,18 @@ main {
 .para {
   text-align: center;
 }
+
 footer {
-  height: 90px;
-  position: relative;
-}
-.footer {
-  text-align: center;
+  margin-top: 20px;
   background-color: rgba(0, 0, 255, 0.329);
   color: #fff;
   height: 40px;
-  display: fixed;
-  position: absolute;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 header {
   width: 100%;
   text-align: center;
@@ -90,4 +89,10 @@ i:hover {
 i:active {
   transform: scale(.8);
   outline: none;
+}
+
+.formSelect {
+  width: 30%;
+  margin: auto;
+  margin-bottom: 70px;
 }

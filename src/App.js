@@ -17,12 +17,14 @@ class App extends Component {
        horneList:{},
     }
   }
+
   showData=(data)=>{
     this.setState({
       show:true,
       horneList:data,
     })
   }
+  
   closeData=()=>{
     this.setState({
       show:false
