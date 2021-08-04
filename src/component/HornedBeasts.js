@@ -9,6 +9,7 @@ class HornedBeasts extends Component {
             counter: 0
         }
     }
+
     counterHandler = () => {
         (
             this.setState({
@@ -16,18 +17,18 @@ class HornedBeasts extends Component {
             })
         )
     }
+    
     ShowList=()=>{
-        let data ={
+        
+        this.props.showDataList({
             imageUrl: this.props.imageUrl,
             title:this.props.title,
             description: this.props.description
-        }
-        this.props.showDataList(data)
+        })
     }
 
     render() {
         return (
-
             <>
                 <Card bg='light'>
                     <Card.Img className='carded' variant="top" onClick={() => this.counterHandler()} src={this.props.imageUrl} width={200} height={280} />
@@ -42,7 +43,6 @@ class HornedBeasts extends Component {
                     </Card.Body>
                 </Card>
             </>
-
         )
     }
 }
