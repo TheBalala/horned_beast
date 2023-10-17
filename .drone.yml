@@ -10,7 +10,7 @@ steps:
     - npm run build
     
   - name: build-docker-image
-    image: docker
+    image: docker:19.03-dind
     commands:
       - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
       - docker images
