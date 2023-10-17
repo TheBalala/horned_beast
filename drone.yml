@@ -4,11 +4,11 @@ type: docker
 name: default
 
 steps:
-  - name: Install dependanice 
-    image: node:10.12.0-slim
-    commands:
-    - npm install
-    - npm run build
+  # - name: Install dependanice 
+  #   image: node:10.12.0-slim
+  #   commands:
+  #   - npm install
+  #   - npm run build
 
   - name: build-and-push-docker-image
     image: plugins/docker
