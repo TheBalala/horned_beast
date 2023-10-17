@@ -10,42 +10,48 @@ steps:
   #   - npm install
   #   - npm run build
 
-  - name: build-and-push-docker-image
-    image: plugins/docker
+  # - name: build-and-push-docker-image
+  #   image: plugins/docker
+  #   settings:
+  #     USERNAME:
+  #       from_secret: USERNAME
+  #     PASSWORD:
+  #       from_secret: PASSWORD
+  #     repo: alialhjouj/hello-world
+  #     tags: [1.0.0.6]
+    
+  - name: build-docker-image
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run
     settings:
       USERNAME:
         from_secret: USERNAME
       PASSWORD:
         from_secret: PASSWORD
-      repo: alialhjouj/$DRONE_REPO_NAME
-      tags: [$DRONE_BUILD_NUMBER]
-    
-  # - name: build-docker-image
-  #   image: docker:dind
-  #   volumes:
-  #     - name: dockersock
-  #       path: /var/run
-  #   commands:
-  #     - sleep 5
-  #     - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
-  #     - docker images
+    commands:
+      - sleep 5
+      - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - docker build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
+      - docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
 
   - name: list-all-environment-variables
     image: alpine
     commands:
       - printenv
 
-# services:
-#   - name: docker
-#     image: docker:dind
-#     privileged: true
-#     volumes:
-#       - name: dockersock
-#         path: /var/run
+services:
+  - name: docker
+    image: docker:dind
+    privileged: true
+    volumes:
+      - name: dockersock
+        path: /var/run
 
-# volumes:
-#   - name: dockersock
-#     temp: {}
+volumes:
+  - name: dockersock
+    temp: {}
 
 
 
