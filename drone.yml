@@ -39,6 +39,7 @@ steps:
 
   - name: build-docker-image
     image: docker:dind
+    privileged: true
     volumes:
       - name: dockersock
         path: /var/run
