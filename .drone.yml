@@ -10,7 +10,8 @@ steps:
     - npm run build
     
   - name: build-docker-image
-    image: docker:19.03-dind
+    image: docker:dind
+    privileged: true
     commands:
       - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
       - docker images
