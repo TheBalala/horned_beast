@@ -11,10 +11,7 @@ steps:
     - npm run build
     
   - name: build-docker-image
-    image: docker:dind
-    volumes:
-    - name: dockersock
-      path: /var/run
+    image: docker
     commands:
       - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
       - docker images
@@ -29,7 +26,5 @@ services:
     image: docker:dind
     privileged: true
     command: [ '-H', 'unix:///drone/docker.sock' ]
-volumes:
-- name: dockersock
-  temp: {}
+
 
