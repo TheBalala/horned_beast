@@ -11,31 +11,33 @@ steps:
   #   - npm install
   #   - npm run build
 
-  - name: build-and-push-docker-image
-    image: plugins/docker
-    settings:
-        USERNAME:
-          from_secret: USERNAME
-        PASSWORD:
-          from_secret: PASSWORD
-    commands:
-      - printenv
-      - echo $DRONE_BUILD_NUMBER
-      - docker build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
-      - docker login -u $USERNAME -p $PASSWORD
-      - docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
-
   # - name: build-and-push-docker-image
   #   image: plugins/docker
   #   settings:
-  #     USERNAME:
-  #       from_secret: USERNAME
-  #     PASSWORD:
-  #       from_secret: PASSWORD
-  #     repo: alialhjouj/hello-world
-  #     tags: 
-  #       - "${TAGS}"
-    
+  #       USERNAME:
+  #         from_secret: USERNAME
+  #       PASSWORD:
+  #         from_secret: PASSWORD
+  #   commands:
+  #     - printenv
+  #     - echo $DRONE_BUILD_NUMBER
+  #     - docker build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
+  #     - docker login -u $USERNAME -p $PASSWORD
+  #     - docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
+
+  - name: build-and-push-docker-image
+    image: plugins/docker
+    settings:
+      USERNAME:
+        from_secret: USERNAME
+      PASSWORD:
+        from_secret: PASSWORD
+      repo: alialhjouj/hello-world
+      tags: ["$DRONE_BUILD_NUMBER"]
+    commands:
+      - printenv
+
+
   # - name: build-docker-image
   #   image: docker:dind
   #   volumes:
