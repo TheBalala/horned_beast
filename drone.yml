@@ -4,25 +4,47 @@ type: docker
 name: default
 
 steps:
-- name: test
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run
-  commands:
-  - sleep 5 # give docker enough time to start
-  - docker ps -a
+  - name: Install dependanice 
+    image: node:10.12.0-slim
+    commands:
+    - npm install
+    - npm run build
 
-services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
+  - name: build-and-push-docker-image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: alialhjouj
+      password:
+        from_secret: Alicoder1996
+      repo: alialhjouj/hello-world
+      tags: [1.0.0.6]
+    
+  # - name: build-docker-image
+  #   image: docker:dind
+  #   volumes:
+  #     - name: dockersock
+  #       path: /var/run
+  #   commands:
+  #     - sleep 5
+  #     - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
+  #     - docker images
 
-volumes:
-- name: dockersock
-  temp: {}
+  - name: list-all-environment-variables
+    image: alpine
+    commands:
+      - printenv
+
+# services:
+#   - name: docker
+#     image: docker:dind
+#     privileged: true
+#     volumes:
+#       - name: dockersock
+#         path: /var/run
+
+# volumes:
+#   - name: dockersock
+#     temp: {}
 
 
