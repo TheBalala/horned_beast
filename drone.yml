@@ -25,7 +25,8 @@ steps:
       DOCKER_USERNAME: "$USERNAME"
       DOCKER_PASSWORD: "$PASSWORD"
     commands:
-      - docker build -t $REPO:$TAGS .
+      - IMAGE_REF="$REPO:$TAGS"
+      - docker build -t "$IMAGE_REF" .
       - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - docker push $REPO:$TAGS
 
