@@ -4,11 +4,18 @@ type: kubernetes
 name: default
 
 steps:
+
   # - name: Install dependanice 
   #   image: node:10.12.0-slim
   #   commands:
   #   - npm install
   #   - npm run build
+
+
+  - name: set-environment-variables
+    image: alpine
+    environment:
+      TAGS: "$DRONE_BUILD_NUMBER"
 
   - name: build-and-push-docker-image
     image: plugins/docker
@@ -18,7 +25,8 @@ steps:
       PASSWORD:
         from_secret: PASSWORD
       repo: alialhjouj/hello-world
-      tags: ["$DRONE_BUILD_NUMBER"]
+      tags: 
+        - "${TAGS}"
     
   # - name: build-docker-image
   #   image: docker:dind
