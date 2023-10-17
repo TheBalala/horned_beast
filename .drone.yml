@@ -23,13 +23,13 @@ steps:
     commands:
       - printenv
 
-services:
-- name: docker
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run
+# services:
+# - name: docker
+#   image: docker:dind
+#   volumes:
+#   - name: dockersock
+#     path: /var/run
 
-volumes:
-- name: dockersock
-  temp: {}
+# volumes:
+# - name: dockersock
+#   temp: {}
