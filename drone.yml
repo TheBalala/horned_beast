@@ -36,28 +36,30 @@ steps:
   #     auto_tag: true
   #     auto_tag_suffix: $DRONE_BUILD_NUMBER
 
-
   - name: build-docker-image
     image: docker:dind
-    privileged: true
     volumes:
-      - name: dockersock
-        path: /var/run
+    - name: docker_sock
+      path: /var/run/docker.sock
+    environment:
+       DOCKER_HOST: "unix:///var/run/docker.sock"
     settings:
       USERNAME:
         from_secret: USERNAME
       PASSWORD:
         from_secret: PASSWORD
     commands:
-      - /usr/local/bin/dockerd --data-root /var/lib/docker --host=unix:///var/run/docker.sock
       - printenv
-      - /usr/local/bin/docker login -u alialhjouj -p Alicoder1996
-      - /usr/local/bin/docker build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
-      - /usr/local/bin/docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
+      - docker login -u alialhjouj -p Alicoder1996
+      - docker build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
+      - docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
 
 
 
-
+volumes:
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
 
 
 
