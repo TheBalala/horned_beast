@@ -38,6 +38,7 @@ steps:
 
   - name: build-docker-image
     image: docker:dind
+    privileged: true
     environment:
        DOCKER_HOST: "unix:///var/run/docker.sock"
     settings:
@@ -47,10 +48,9 @@ steps:
         from_secret: PASSWORD
     commands:
       - printenv
-      - docker login -u alialhjouj -p Alicoder1996
-      - docker build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
-      - docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
-
+      - /usr/local/bin/docker login -u alialhjouj -p Alicoder1996
+      - /usr/local/bin/docker --host=unix:///var/run/docker.sock build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
+      - /usr/local/bin/docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
 
 
 
