@@ -19,14 +19,24 @@ steps:
       REPO: "alialhjouj/hello-world"  # Repository name including the organization/user
       TAGS: "$DRONE_BUILD_NUMBER"
 
+  - name: debug-variables
+    image: alpine
+    environment:
+      REPO: "$REPO"
+      TAGS: "$TAGS"
+    commands:
+      - echo "REPO: $REPO"
+      - echo "TAGS: $TAGS"
+
   - name: build-and-push-docker-image
     image: plugins/docker
     environment:
       DOCKER_USERNAME: "$USERNAME"
       DOCKER_PASSWORD: "$PASSWORD"
+      TAGS: "$DRONE_BUILD_NUMBER"
     commands:
-      - IMAGE_REF="$REPO:$TAGS"
-      - docker build -t $IMAGE_REF .
+      - echo $TAGS
+      - docker build -t $REPO:$TAGS .
       - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - docker push $REPO:$TAGS
 
