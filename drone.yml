@@ -25,12 +25,10 @@ steps:
       - printenv
 
 services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
+  docker:
+    image: docker:dind
+    privileged: true
+    command: [ '-H', 'unix:///drone/docker.sock' ]
 volumes:
 - name: dockersock
   temp: {}
