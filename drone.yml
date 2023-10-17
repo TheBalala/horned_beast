@@ -38,9 +38,6 @@ steps:
 
   - name: build-docker-image
     image: docker:dind
-    volumes:
-    - name: docker_sock
-      path: /var/run/docker.sock
     environment:
        DOCKER_HOST: "unix:///var/run/docker.sock"
     settings:
@@ -55,11 +52,6 @@ steps:
       - docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
 
 
-
-volumes:
-  - name: docker_sock
-    host:
-      path: /var/run/docker.sock
 
 
 
