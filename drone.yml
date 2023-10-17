@@ -25,34 +25,34 @@ steps:
   #     - docker login -u $USERNAME -p $PASSWORD
   #     - docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
 
-  - name: build-and-push-docker-image
-    image: plugins/docker
-    settings:
-      USERNAME:
-        from_secret: USERNAME
-      PASSWORD:
-        from_secret: PASSWORD
-      repo: alialhjouj/hello-world
-      auto_tag: true
-      auto_tag_suffix: $DRONE_BUILD_NUMBER
-
-
-  # - name: build-docker-image
-  #   image: docker:dind
-  #   volumes:
-  #     - name: dockersock
-  #       path: /var/run
+  # - name: build-and-push-docker-image
+  #   image: plugins/docker
   #   settings:
   #     USERNAME:
   #       from_secret: USERNAME
   #     PASSWORD:
   #       from_secret: PASSWORD
-  #   commands:
-  #     - /usr/local/bin/dockerd --data-root /var/lib/docker --host=unix:///var/run/docker.sock
-  #     - printenv
-  #     - docker login -u alialhjouj -p Alicoder1996
-  #     - docker build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
-  #     - docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
+  #     repo: alialhjouj/hello-world
+  #     auto_tag: true
+  #     auto_tag_suffix: $DRONE_BUILD_NUMBER
+
+
+  - name: build-docker-image
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run
+    settings:
+      USERNAME:
+        from_secret: USERNAME
+      PASSWORD:
+        from_secret: PASSWORD
+    commands:
+      - /usr/local/bin/dockerd --data-root /var/lib/docker --host=unix:///var/run/docker.sock
+      - printenv
+      - /usr/local/bin/docker login -u alialhjouj -p Alicoder1996
+      - /usr/local/bin/docker build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
+      - /usr/local/bin/docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
 
 
 
