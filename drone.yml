@@ -19,28 +19,17 @@ steps:
       REPO: "alialhjouj/hello-world"  # Repository name including the organization/user
       TAGS: "$DRONE_BUILD_NUMBER"
 
-
   - name: build-and-push-docker-image
     image: plugins/docker
-    settings:
-      NUMBER:
-        from_secret: $DRONE_BUILD_NUMBER
+    environment:
+      DOCKER_USERNAME: "$USERNAME"
+      DOCKER_PASSWORD: "$PASSWORD"
     commands:
-      - echo NUMBER
+      - printenv
+      - echo $DRONE_BUILD_NUMBER
       - docker build -t $REPO:$TAGS .
       - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - docker push $REPO:$TAGS
-  # - name: build-and-push-docker-image
-  #   image: plugins/docker
-  #   environment:
-  #     DOCKER_USERNAME: "$USERNAME"
-  #     DOCKER_PASSWORD: "$PASSWORD"
-  #     TAGS: "$DRONE_BUILD_NUMBER"
-  #   commands:
-  #     - echo '$TAGS'
-  #     - docker build -t $REPO:$TAGS .
-  #     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  #     - docker push $REPO:$TAGS
 
   # - name: build-and-push-docker-image
   #   image: plugins/docker
