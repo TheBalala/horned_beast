@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: greeting
+
+steps:
+- name: Install dependanice 
+  image: node:10.12.0-slim
+  commands:
+  - npm install
+  - npm run build
+  
+- name: build-docker-image
+  image: docker
+  commands:
+    - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
+    - docker images
+
+- name: list-all-environment-variables
+  image: alpine
+  commands:
+    - printenv
