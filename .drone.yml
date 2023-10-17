@@ -11,7 +11,9 @@ steps:
     
   - name: build-docker-image
     image: docker:dind
-    privileged: true
+    volumes:
+    - name: dockersock
+      path: /var/run
     commands:
       - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
       - docker images
@@ -20,3 +22,15 @@ steps:
     image: alpine
     commands:
       - printenv
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
