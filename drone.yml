@@ -13,12 +13,11 @@ steps:
   - name: build-and-push-docker-image
     image: plugins/docker
     settings:
-      username:
+      USERNAME:
         from_secret: USERNAME
-      password:
+      PASSWORD:
         from_secret: PASSWORD
-      repo: alialhjouj/hello-world
-      tags: [1.0.0.6]
+      repo: alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
     
   # - name: build-docker-image
   #   image: docker:dind
