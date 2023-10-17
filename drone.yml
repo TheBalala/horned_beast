@@ -48,7 +48,7 @@ steps:
     commands:
       - printenv
       - /usr/local/bin/docker login -u alialhjouj -p Alicoder1996
-      - /usr/local/bin/dockerd --host=unix:///var/run/docker.sock build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER .
+      - /usr/local/bin/dockerd  build -t alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER  --host=unix:///var/run/docker.sock.
       - /usr/local/bin/docker push alialhjouj/$DRONE_REPO_NAME:$DRONE_BUILD_NUMBER
 
 
