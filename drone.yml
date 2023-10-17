@@ -11,7 +11,7 @@ steps:
     - npm run build
     
   - name: build-docker-image
-    image: docker
+    image: docker:dind
     environment:
       - DOCKER_HOST=unix:///drone/docker.sock
     commands:
@@ -23,10 +23,10 @@ steps:
     commands:
       - printenv
 
-services:
-  docker:
-    image: docker:dind
-    privileged: true
-    command: [ '-H', 'unix:///drone/docker.sock' ]
+# services:
+#   docker:
+#     image: docker:dind
+#     privileged: true
+#     command: [ '-H', 'unix:///drone/docker.sock' ]
 
 
