@@ -22,7 +22,7 @@ steps:
 
   - name: build-and-push-docker-image
     image: plugins/docker
-    environment:
+    settings:
       NUMBER:
         from_secret: $DRONE_BUILD_NUMBER
     commands:
