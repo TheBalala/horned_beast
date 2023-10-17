@@ -12,6 +12,8 @@ steps:
     
   - name: build-docker-image
     image: docker
+    environment:
+      - DOCKER_HOST=unix:///drone/docker.sock
     commands:
       - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
       - docker images
