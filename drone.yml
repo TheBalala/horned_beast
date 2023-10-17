@@ -11,22 +11,34 @@ steps:
   #   - npm install
   #   - npm run build
 
-
   - name: set-environment-variables
     image: alpine
     environment:
+      USERNAME: "alialhjouj"
+      PASSWORD: "Alicoder1996"
+      REPO: "alialhjouj/hello-world"  # Repository name including the organization/user
       TAGS: "$DRONE_BUILD_NUMBER"
 
   - name: build-and-push-docker-image
     image: plugins/docker
-    settings:
-      USERNAME:
-        from_secret: USERNAME
-      PASSWORD:
-        from_secret: PASSWORD
-      repo: alialhjouj/hello-world
-      tags: 
-        - "${TAGS}"
+    environment:
+      DOCKER_USERNAME: "$USERNAME"
+      DOCKER_PASSWORD: "$PASSWORD"
+    commands:
+      - docker build -t $REPO:$TAGS .
+      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - docker push $REPO:$TAGS
+
+  # - name: build-and-push-docker-image
+  #   image: plugins/docker
+  #   settings:
+  #     USERNAME:
+  #       from_secret: USERNAME
+  #     PASSWORD:
+  #       from_secret: PASSWORD
+  #     repo: alialhjouj/hello-world
+  #     tags: 
+  #       - "${TAGS}"
     
   # - name: build-docker-image
   #   image: docker:dind
