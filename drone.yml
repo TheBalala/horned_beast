@@ -12,9 +12,11 @@ steps:
     
   - name: build-docker-image
     image: docker:dind
-    environment:
-      - DOCKER_HOST=unix:///drone/docker.sock
+    volumes:
+      - name: dockersock
+        path: /var/run
     commands:
+      - sleep 5
       - docker build -t my-node-app:$DRONE_BUILD_NUMBER .
       - docker images
 
@@ -23,10 +25,16 @@ steps:
     commands:
       - printenv
 
-# services:
-#   docker:
-#     image: docker:dind
-#     privileged: true
-#     command: [ '-H', 'unix:///drone/docker.sock' ]
+services:
+  - name: docker
+    image: docker:dind
+    privileged: true
+    volumes:
+      - name: dockersock
+        path: /var/run
+
+volumes:
+  - name: dockersock
+    temp: {}
 
 
