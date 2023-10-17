@@ -14,9 +14,9 @@ steps:
     image: plugins/docker
     settings:
       username:
-        from_secret: alialhjouj
+        from_secret: USERNAME
       password:
-        from_secret: Alicoder1996
+        from_secret: PASSWORD
       repo: alialhjouj/hello-world
       tags: [1.0.0.6]
     
