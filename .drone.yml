@@ -1,5 +1,6 @@
 ---
 kind: pipeline
+type: docker
 name: default
 
 steps:
@@ -23,13 +24,13 @@ steps:
     commands:
       - printenv
 
-# services:
-# - name: docker
-#   image: docker:dind
-#   volumes:
-#   - name: dockersock
-#     path: /var/run
-
-# volumes:
-# - name: dockersock
-#   temp: {}
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+volumes:
+- name: dockersock
+  temp: {}
